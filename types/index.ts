@@ -8,9 +8,13 @@ export interface User {
   company: {
     name: string;
   };
+  address: {
+    city: string;
+  };
+  status: 'active' | 'inactive' | 'pending';
 }
 
-export type SortableKeys = 'name' | 'email' | 'username';
+export type SortableKeys = 'name' | 'email' | 'username' | 'phone';
 export type SortOrder = 'asc' | 'desc';
 
 export interface SortConfig {
@@ -21,4 +25,13 @@ export interface SortConfig {
 export interface FilterConfig {
   searchQuery: string;
   companyFilter: string;
+  cityFilter: string;
+  statusFilter: string;
 }
+
+export interface PaginationConfig {
+  currentPage: number;
+  pageSize: number;
+}
+
+export type Theme = 'light' | 'dark';

@@ -10,16 +10,18 @@ interface TableHeaderProps {
 
 export const TableHeader: React.FC<TableHeaderProps> = ({ label, sortKey, currentSort, onSort }) => {
   const isActive = currentSort.key === sortKey;
-  
+
   return (
-    <th 
+    <th
       onClick={() => onSort(sortKey)}
-      className="px-6 py-4 cursor-pointer hover:bg-gray-100 transition-colors select-none text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+      className={`th-sortable ${isActive ? 'is-active' : ''}`}
+      aria-sort={isActive ? (currentSort.order === 'asc' ? 'ascending' : 'descending') : undefined}
     >
-      <div className="flex items-center gap-1">
+      <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
         {label}
-        <span className={`text-gray-400 transition-transform ${isActive ? 'text-blue-600 font-bold' : 'opacity-40'}`}>
-          {isActive && currentSort.order === 'desc' ? '▼' : '▲'}
+        <span className="sort-icon">
+          <span className={`arrow ${isActive && currentSort.order === 'asc' ? 'active' : ''}`}>▲</span>
+          <span className={`arrow ${isActive && currentSort.order === 'desc' ? 'active' : ''}`}>▼</span>
         </span>
       </div>
     </th>
